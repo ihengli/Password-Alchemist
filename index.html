@@ -16,15 +16,16 @@
         <main>
             <div class="password-section">
                 <div class="password-display">
-                    <input type="text" id="passwordOutput" readonly>
-                    <button id="copyButton" class="copy-btn">复制</button>
+                    <input type="text" id="passwordOutput" readonly placeholder="点击下方'生成密码'按钮生成密码">
+                    <button id="copyButton" class="copy-btn" disabled>复制</button>
                 </div>
                 <div class="password-strength">
-                    <div class="strength-bar">
-                        <div class="strength-fill" id="strengthFill"></div>
+                    <span id="strengthText">密码强度：<span class="strength-level"></span></span>
+                    <div class="strength-bars">
+                        <div class="strength-segment" data-level="weak"></div>
+                        <div class="strength-segment" data-level="medium"></div>
+                        <div class="strength-segment" data-level="strong"></div>
                     </div>
-                    <span id="strengthText">密码强度：</span>
-                    <span id="entropyValue">熵值：</span>
                 </div>
             </div>
 
@@ -54,56 +55,24 @@
                             <input type="checkbox" id="symbols" checked>
                             特殊字符 (!@#$%^&*)
                         </label>
+                        <label>
+                            <input type="checkbox" id="excludeSimilar" checked>
+                            排除相似字符 (0O1l)
+                        </label>
                     </div>
-                </div>
-
-                <div class="option-group">
-                    <label>
-                        <input type="checkbox" id="excludeSimilar" checked>
-                        排除相似字符 (0O1l)
-                    </label>
                 </div>
 
                 <button id="generateButton" class="generate-btn">生成密码</button>
             </div>
 
             <div class="history-section">
-                <h2>历史记录</h2>
+                <h2>历史记录</h2>  
                 <div id="passwordHistory" class="password-history"></div>
             </div>
         </main>
 
         <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>关于 Password Alchemist</h3>
-                    <p>一个安全可靠的密码生成工具，帮助您创建强密码。</p>
-                </div>
-                <div class="footer-section">
-                    <h3>安全说明</h3>
-                    <p>所有密码生成均在本地完成，不会向服务器传输任何数据。</p>
-                </div>
-                <div class="footer-section">
-                    <h3>使用建议</h3>
-                    <ul>
-                        <li>建议密码长度至少12位</li>
-                        <li>使用多种字符组合</li>
-                        <li>定期更换密码</li>
-                        <li>不同网站使用不同密码</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>链接</h3>
-                    <ul>
-                        <li><a href="#" id="githubLink">GitHub</a></li>
-                        <li><a href="#" id="privacyLink">隐私政策</a></li>
-                        <li><a href="#" id="contactLink">联系我们</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Password Alchemist. All rights reserved.</p>
-            </div>
+            <p>所有密码生成均在本地完成，不会向服务器传输任何数据</p>
         </footer>
     </div>
     <script src="js/password-generator.js"></script>

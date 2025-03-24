@@ -82,26 +82,40 @@ function calculateStrength(password) {
 
 // 更新强度指示器
 function updateStrengthIndicator(password) {
-    const { strength, entropy } = calculateStrength(password);
+    const strengthLevel = document.querySelector('.strength-level');
+    const segments = document.querySelectorAll('.strength-segment');
     
-    // 更新强度条
-    const strengthPercent = (strength / 4) * 100;
-    strengthFill.style.width = `${strengthPercent}%`;
+    // 移除所有现有的类
+    strengthLevel.classList.remove('weak', 'medium', 'strong');
+    segments.forEach(segment => segment.classList.remove('active'));
     
-    // 更新颜色
-    const colors = {
-        0: '#e74c3c',
-        1: '#f1c40f',
-        2: '#2ecc71',
-        3: '#2ecc71',
-        4: '#2ecc71'
-    };
-    strengthFill.style.backgroundColor = colors[strength];
+    // 计算密码强度
+    let strength = 0;
+    if (password.length >= 8) strength += 1;
+    if (/[A-Z]/.test(password)) strength += 1;
+    if (/[a-z]/.test(password)) strength += 1;
+    if (/[0-9]/.test(password)) strength += 1;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 1;
     
-    // 更新文本
-    const strengthLabels = ['非常弱', '弱', '中等', '强', '非常强'];
-    strengthText.textContent = `密码强度：${strengthLabels[strength]}`;
-    entropyValue.textContent = `熵值：${entropy} 位`;
+    // 设置强度等级和样式
+    let strengthClass, strengthText;
+    if (strength <= 2) {
+        strengthClass = 'weak';
+        strengthText = '弱';
+        segments[0].classList.add('active');
+    } else if (strength <= 3) {
+        strengthClass = 'medium';
+        strengthText = '中';
+        segments[0].classList.add('active');
+        segments[1].classList.add('active');
+    } else {
+        strengthClass = 'strong';
+        strengthText = '强';
+        segments.forEach(segment => segment.classList.add('active'));
+    }
+    
+    strengthLevel.classList.add(strengthClass);
+    strengthLevel.textContent = strengthText;
 }
 
 // 生成密码
@@ -152,10 +166,16 @@ function generatePassword() {
     
     // 添加到历史记录
     addToHistory(password);
+    
+    // 生成密码后启用复制按钮
+    document.getElementById('copyButton').disabled = false;
 }
 
 // 复制密码
 function copyPassword() {
+    if (!document.getElementById('passwordOutput').value) {
+        return; // 如果没有密码，不执行复制
+    }
     passwordOutput.select();
     document.execCommand('copy');
     
@@ -191,7 +211,9 @@ function updateHistoryDisplay() {
     `).join('');
 }
 
+// 初始化时禁用复制按钮
+document.getElementById('copyButton').disabled = true;
+
 // 初始化
 passwordLength.value = 12;
-lengthValue.textContent = '12';
-generatePassword(); 
+lengthValue.textContent = '12'; 

@@ -198,4 +198,49 @@ footer {
     .checkbox-group {
         grid-template-columns: 1fr;
     }
+}
+
+input[type="range"] {
+    width: 200px;
+    height: 8px;
+    -webkit-appearance: none;
+    background: var(--border-color);
+    border-radius: 4px;
+    outline: none;
+    margin: 0 1rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: #357abd;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background-color: #357abd;
+}
+
+#lengthValue {
+    min-width: 2rem;
+    display: inline-block;
+    text-align: center;
+    font-weight: 500;
 } 

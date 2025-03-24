@@ -192,4 +192,6 @@ function updateHistoryDisplay() {
 }
 
 // 初始化
+passwordLength.value = 12;
+lengthValue.textContent = '12';
 generatePassword(); 

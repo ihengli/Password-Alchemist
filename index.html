@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Alchemist - 密码生成器</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Password Alchemist</h1>
+            <p class="subtitle">安全可靠的密码生成工具</p>
+        </header>
+
+        <main>
+            <div class="password-section">
+                <div class="password-display">
+                    <input type="text" id="passwordOutput" readonly>
+                    <button id="copyButton" class="copy-btn">复制</button>
+                </div>
+                <div class="password-strength">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <span id="strengthText">密码强度：</span>
+                    <span id="entropyValue">熵值：</span>
+                </div>
+            </div>
+
+            <div class="options-section">
+                <div class="option-group">
+                    <label for="passwordLength">密码长度：</label>
+                    <input type="number" id="passwordLength" min="8" max="64" value="16">
+                    <span id="lengthValue">16</span>
+                </div>
+
+                <div class="option-group">
+                    <label>包含字符：</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="uppercase" checked>
+                            大写字母 (A-Z)
+                        </label>
+                        <label>
+                            <input type="checkbox" id="lowercase" checked>
+                            小写字母 (a-z)
+                        </label>
+                        <label>
+                            <input type="checkbox" id="numbers" checked>
+                            数字 (0-9)
+                        </label>
+                        <label>
+                            <input type="checkbox" id="symbols" checked>
+                            特殊字符 (!@#$%^&*)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="excludeSimilar" checked>
+                        排除相似字符 (0O1l)
+                    </label>
+                </div>
+
+                <button id="generateButton" class="generate-btn">生成密码</button>
+            </div>
+
+            <div class="history-section">
+                <h2>历史记录</h2>
+                <div id="passwordHistory" class="password-history"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>所有密码生成均在本地完成，不会向服务器传输任何数据</p>
+        </footer>
+    </div>
+    <script src="js/password-generator.js"></script>
+</body>
+</html> 
